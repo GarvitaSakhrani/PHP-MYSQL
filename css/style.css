@@ -1,18 +1,118 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
-.container{
-  max-width:1440px;
-  margin:0 auto;
-  padding: 0 15px;
+body {
+  background-color: #d4737d;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+h1{
+  text-align: center;
+  margin-bottom: 20px;
+}
+#form,.login-form{
+  width: 540px;
+  padding: 20px 30px;
+  border: 2px solid grey;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+#form label,.login-form label {
+  display: block;
+  font-weight: 600;
+  margin: 5px 0;
+  color: black;
+}
+#form input[type="text"], #form input[type="password"],#form input[type="email"],#form input[type="tel"]{
+  width: 60%;
+}
+input[type="submit"] {
+  margin-top: 20px;
+  width:100%;
+  background-color: #6c5ce7;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+input[type="submit"]:hover {
+  background-color: #5a4ecb;
+}
+.submit-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.btn {
+  padding: 10px 20px;
+  margin-bottom: 30px;
+  border: 2px solid transparent;
+  background-color: #2d3436;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+.navigation {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.navigation a {
+  background-color: #dfe6e9;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #2d3436;
+  text-decoration: none;
+  font-weight: bold;
+}
+.navigation a:hover {
+  background-color: #b2bec3;
+}
+.login-form {
+  width: 350px;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+.static-wrapper{
+  position:relative;
+  display:flex;
+  align-items: center;
+}
+.static{
+  position:absolute;
+  left:10px;
+  font-size:13px;
+}
+.static-wrapper input[type="text"]{
+ padding-left: 40px;
 }
 .wrapper{
   display: flex;
 }
+.heading{
+  margin-bottom: 15px;
+}
 .error{
   color:red;
+}
+.error_login{
+  color:white;
 }
 .success{
   color:green;

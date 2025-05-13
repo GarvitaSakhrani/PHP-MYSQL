@@ -3,7 +3,7 @@ session_start();
 if(isset($_GET['email'])){
   $_SESSION['password_reset_email'] = $_GET['email'];
 }
-require 'dataInput.php';
+require_once 'dataInput.php';
 if($_SERVER['REQUEST_METHOD'] == "POST"){
   if(!isset($_SESSION['password_reset_email'])){
     echo "Session variable not set.";
@@ -29,18 +29,21 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Password Reset</title>
+  <link rel = "stylesheet" href="./css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="./js/index.js"></script>
 </head>
 <body>
   <div class="container">
     <h2>Reset Password</h2>
-    <form method = "POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-     <label for = "new_password">Enter Password</label><br>
-     <input type = "password" name = "new_password" id = "new_password" required>
-     <br><br>
-     <label for = "confirm_password">Confirm Password</label><br>
-     <input type = "password" name = "confirm_password" id = "confirm_password" required>
-     <br><br>
-     <input type = "submit" value = "submit">
+    <form id="form" method = "POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+      <label for = "new_password">Enter Password</label><br>
+      <input type = "password" name = "new_password" id = "new_password" required>
+      <br><br>
+      <label for = "confirm_password">Confirm Password</label><br>
+      <input type = "password" name = "confirm_password" id = "confirm_password" required>
+      <br><br>
+      <input type = "submit" value = "submit">
     </form>
   </div>
 </body>

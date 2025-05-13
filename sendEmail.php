@@ -27,7 +27,7 @@ class SendEmail{
           $this->mail->isSMTP();                                            
           $this->mail->Host       = 'smtp.gmail.com';                     
           $this->mail->SMTPAuth   = true;                                   
-          $this->mail->Username   = 'testing3846@gmail.com';                     
+          $this->mail->Username   = 'testing3846@gmail.com';                     +
           $this->mail->Password   = 'qekx okbf ityf cwkv';                               
           $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            
           $this->mail->Port       = 587;                                    
@@ -41,7 +41,7 @@ class SendEmail{
           $this->mail->isHTML(true);                                  
           $this->mail->Subject = 'Password Reset';
           $this->mail->Body    = '<p>Click on the below link to reset your password.</p><br>
-                                    <a href="http://example.com/resetPassword.php?email=' . $this->email . '">Password Reset Link</a>';
+                                    <a href="http://PHP-MYSQL.com/resetPassword.php?email=' . $this->email . '">Password Reset Link</a>';
           $this->mail->send();
           echo '<div class="success">Mail has been sent.</div>';
           header('Location: ./login.php');

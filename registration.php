@@ -1,5 +1,5 @@
 <?php 
-require 'dataInput.php';
+require_once 'dataInput.php';
 if($_SERVER['REQUEST_METHOD'] == "POST"){
   $new_user = new Data();
   $fname = trim($_POST['fname']);
@@ -7,6 +7,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
   $email = trim($_POST['email']);
   $contact = trim($_POST['contact']);
   $user_password = trim($_POST['password']);
+  $new_user->createTable();
   if($stmt = $new_user->con->prepare("SELECT * FROM user WHERE email = ?" )){
     $stmt->bind_param('s',$email);
     $stmt->execute();
@@ -16,16 +17,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
       $stmt->close();
       return;
     }
-    else{
-      $sql = $new_user->con->prepare("INSERT INTO user(fname, lname, email, contact, user_password) VALUES(?, ?, ?, ?, ?)");
-      $sql->bind_param('sssss', $fname, $lname, $email, $contact, $user_password);
-      if($sql->execute()){
-        echo '<p class="success">User registered successfully.</p>';
-      }
-      else{
-        echo '<p class="error">Error occured during registration.</p>';
-      }
-      $sql->close();
+    else{ 
+      $new_user->insertData();
     }
   }
 }
@@ -36,34 +29,36 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="./js/index.js"></script>
   <title>Registration</title>
 </head>
 <body>
   <div class="container">
-   <h1>Registration Form</h1>
-   <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-    <label for = "fname">First Name</label><br>
-    <input type = "text" name="fname" id = "fname" required>
-    <br><br>
-    <label for = "lname">Last Name</label><br>
-    <input type = "text" name = "lname" id = "lname">
-    <br><br>
-    <label for = "email">Email</label><br>
-    <input type = "email" name = "email" id = "email">
-    <br><br>
-    <label for = "contact">Contact Number</label><br>
-    <input type = "tel" name = "contact" id = "contact">
-    <br><br>
-    <label for = "password">Password</label><br>
-    <input type = "password" name = "password" id = "password">
-    <br><br>
-    <input type = "submit" value="submit">
-    <br><br>
-   </form>
-  <div class="wrapper">
+    <h1>Registration Form</h1>
+    <form id="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+      <label for = "fname">First Name</label><br>
+      <input type = "text" name="fname" id = "fname" required>
+      <br><br>
+      <label for = "lname">Last Name</label><br>
+      <input type = "text" name = "lname" id = "lname">
+      <br><br>
+      <label for = "email">Email</label><br>
+      <input type = "email" name = "email" id = "email">
+      <br><br>
+      <label for = "contact">Contact Number</label><br>
+      <input type = "tel" name = "contact" id = "contact">
+      <br><br>
+      <label for = "password">Password</label><br>
+      <input type = "password" name = "password" id = "password">
+      <br><br>
+      <input type = "submit" value="submit">
+      <br><br>
+    </form>
+    <div class="wrapper">
       <p>Already have an account.</p>
       <a href = "./login.php">Login Here</a>
-  </div>
+    </div>
   </div>
 </body>
 </html>

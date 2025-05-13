@@ -34,14 +34,16 @@ class Data{
     $this->lname = $_POST['lname'];
     $this->email = $_POST['email'];
     $this->contact = $_POST['contact'];
-    $this->user_password = $_POST['user_password'];
-    $sql = "INSERT INTO user(fname, lname, email, contact, user_password) VALUES('" . $this->fname . "','" . $this->lname . "','" . $this->email . "','" . $this->contact ."','" . $this->user_password . "')";
-    if ($this->con->query($sql) !== TRUE) {
-      echo "Error inserting data: " . $this->con->error;
+    $this->user_password = $_POST['password'];
+    $sql = "INSERT INTO user (fname, lname, email, contact, user_password) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $this->con->prepare($sql);
+    $stmt->bind_param("sssss", $this->fname, $this->lname, $this->email, $this->contact, $this->user_password);
+    if ($stmt->execute()) {
+        echo "Your registration was successful!";
+    } else {
+        echo "Error inserting data: " . $stmt->error;
     }
-    else{
-      echo "Your registration was successful!";
-    }
+    $stmt->close();
   }
   public function updateData($email, $user_password){
     $stmt = $this->con->prepare("UPDATE user SET user_password = ? WHERE email = ?");
@@ -58,10 +60,5 @@ class Data{
   public function __destruct(){
     $this->con->close();
   }
-}
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
-   $user = new Form();
-   $user->createTable();
-   $user->insertData();
 }
 ?>
